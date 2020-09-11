@@ -29,23 +29,38 @@ for (let i = 0; i < cells.length; i++) {
 };
 
 // listens for clicks, adds character, resets board after 9 moves. 
-function cellClicked() {
+function cellClicked(e) {
     if (gameOver) {
         reset();
-    } else {
-        if (clickCount % 2 == 0) {
-            event.target.textContent = firstPlayer;
-            clickCount++;
-        } else {
-            event.target.textContent = secondPlayer;
-            clickCount++;
-        };
-        checkWinner();
-        if (clickCount > 8) {
-            winmsg.innerText = "It's a draw! Click to Play Again!";
-            gameOver = true;
-        }
     }
+
+    if (e.target.textContent !== '') return
+
+    if (clickCount > 2) {
+        checkWinner();
+    } else if (clickCount === 9) {
+        itsADraw()
+    }
+
+    togglePlayer(event)
+}
+
+function togglePlayer(event) {
+    if (clickCount % 2 == 0) {
+        event.target.textContent = firstPlayer;
+        clickCount++;
+        console.log(clickCount);
+    } else {
+        event.target.textContent = secondPlayer;
+        clickCount++;
+        console.log(clickCount);
+    };
+    checkWinner();
+}
+
+function itsADraw() {
+    winmsg.innerText = "It's a draw! Click to Play Again!";
+    gameOver = true;
 }
 
 // main function that that checks for winner and draw
@@ -56,6 +71,7 @@ function checkWinner() {
         for (let j = 0; j < winningCombos[i].length; j++) {
             if (winningCombos[i][j].textContent === firstPlayer) {
                 xSum++
+                // console.log(xSum);
             }
             else if (winningCombos[i][j].textContent === secondPlayer) {
                 oSum++
@@ -66,11 +82,14 @@ function checkWinner() {
             } else if (oSum === 3) {
                 winmsg.innerText = "O Wins! Click to Play Again!";
                 gameOver = true;
-            };
+            }
+            //     else if (clickCount > 8 && xSum == !3 || clickCount > 8 && oSum == !3) {
+            //     gameOver = true;
+            // };
         };
     };
 };
- 
+
 //resets board after win or draw
 function reset() {
     for (let i = 0; i < cells.length; i++) {
