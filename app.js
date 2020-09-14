@@ -34,13 +34,11 @@ function cellClicked(e) {
         reset();
     }
 
-    // if (e.target.textContent !== '') return
-
-    if (clickCount > 2) {
+       if (clickCount > 2) {
         checkWinner();
     } else if (clickCount === 9) {
         itsADraw();
-        // reset();
+        
     }
 
     togglePlayer(event)
@@ -72,7 +70,7 @@ function checkWinner() {
         for (let j = 0; j < winningCombos[i].length; j++) {
             if (winningCombos[i][j].textContent === firstPlayer) {
                 xSum++
-                // console.log(xSum);
+                
             }
             else if (winningCombos[i][j].textContent === secondPlayer) {
                 oSum++
