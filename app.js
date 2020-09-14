@@ -85,6 +85,8 @@ function checkWinner() {
                 else if (clickCount > 8 && xSum == !3 || clickCount > 8 && oSum == !3) {
                 gameOver = true;
                 itsADraw();
+            } else if (clickCount === 10) {               
+                reset();
             };
         };
     };
@@ -98,4 +100,6 @@ function reset() {
     clickCount = 0;
     winmsg.innerText = ""
     gameOver = false;
+    location.reload();
 }
+
