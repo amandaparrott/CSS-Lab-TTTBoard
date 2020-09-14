@@ -34,12 +34,13 @@ function cellClicked(e) {
         reset();
     }
 
-    if (e.target.textContent !== '') return
+    // if (e.target.textContent !== '') return
 
     if (clickCount > 2) {
         checkWinner();
     } else if (clickCount === 9) {
-        itsADraw()
+        itsADraw();
+        // reset();
     }
 
     togglePlayer(event)
@@ -83,9 +84,10 @@ function checkWinner() {
                 winmsg.innerText = "O Wins! Click to Play Again!";
                 gameOver = true;
             }
-            //     else if (clickCount > 8 && xSum == !3 || clickCount > 8 && oSum == !3) {
-            //     gameOver = true;
-            // };
+                else if (clickCount > 8 && xSum == !3 || clickCount > 8 && oSum == !3) {
+                gameOver = true;
+                itsADraw();
+            };
         };
     };
 };
